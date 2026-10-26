@@ -1,0 +1,15 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\ashna\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}",
+    "C:\\Users\\ashna\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages"
+  ],
+  "python.autoComplete.extraPaths": [
+    "${workspaceFolder}",
+    "C:\\Users\\ashna\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages"
+  ],
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingImports": "none",
+    "reportMissingModuleSource": "none"
+  }
+}

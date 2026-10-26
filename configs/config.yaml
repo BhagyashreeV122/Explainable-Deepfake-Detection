@@ -1,0 +1,61 @@
+seed: 42
+
+dataset:
+  raw_dataset_dir: "C:/Users/ashna/Downloads/FaceForensics++_C23"
+  processed_dir: "data/faces"
+  manifest_path: "data/faces/manifest.csv"
+  real_folder: "original"
+  fake_folders:
+    - "Deepfakes"
+    - "Face2Face"
+    - "FaceSwap"
+    - "NeuralTextures"
+  ignored_folders:
+    - "DeepFakeDetection"
+    - "FaceShifter"
+  limit_pairs: 250
+  frames_per_video: 10
+  crop_margin: 0.25
+  image_size: 224
+  split_ratios:
+    train: 0.70
+    val: 0.15
+    test: 0.15
+
+model:
+  name: "efficientnet_b0"
+  pretrained: true
+  num_classes: 2
+  dropout: 0.2
+  secondary_model: "vit_tiny_patch16_224"
+
+training:
+  batch_size: 32
+  num_workers: 0
+  epochs: 5
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  min_lr: 0.000001
+  mixed_precision: true
+  early_stopping_patience: 3
+
+evaluation:
+  batch_size: 32
+  num_workers: 0
+  metrics:
+    - "accuracy"
+    - "auc"
+    - "f1"
+    - "precision"
+    - "recall"
+
+explainability:
+  target_layer: "conv_head"
+  num_samples: 16
+  heatmap_alpha: 0.45
+  colormap: "COLORMAP_JET"
+
+outputs:
+  checkpoint_dir: "outputs/checkpoints"
+  log_dir: "outputs/logs"
+  heatmap_dir: "outputs/heatmaps"

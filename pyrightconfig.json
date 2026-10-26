@@ -1,0 +1,12 @@
+{
+  "include": [
+    "."
+  ],
+  "pythonPath": "C:\\Users\\ashna\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+  "extraPaths": [
+    ".",
+    "C:\\Users\\ashna\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages"
+  ],
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none"
+}

@@ -1,0 +1,15 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+data/raw/*
+data/faces/*
+outputs/checkpoints/*
+outputs/heatmaps/
+outputs/inference/
+outputs/logs/
+*.pt
+*.pth
+*.zip
+kaggle.json
+.ipynb_checkpoints/
