@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install PyTorch (CPU version, small and fast)
+        run: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Install other requirements
+        run: pip install -r requirements.txt
+
+      - name: Check code for serious errors (ruff)
+        run: |
+          pip install ruff
+          ruff check . --select E9,F63,F7,F82
+
+      - name: Run unit tests
+        run: python -m pytest -q --junitxml=test-report.xml
+
+      - name: Save test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test-report.xml
+
+  package:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build a source package
+        run: git archive --format=zip --output=deepfake-detection-source.zip HEAD
+      - name: Save the package
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-package
+          path: deepfake-detection-source.zip
